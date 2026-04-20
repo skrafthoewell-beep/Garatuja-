@@ -1,0 +1,4 @@
+display block: por padrão a div é assim, ou seja não deixa não texto ocpuar o espaço ao lado
+display inline: ocupa o tamanho de uma palavra independente do tamanho atribuído
+display inline-block:
+display none
