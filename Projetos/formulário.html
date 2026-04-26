@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+<title>Quiz</title>
+<div class="banner">
+<h1>
+  -
+    Seu personagem dos quadrinhos tem os traços mais compatíveis com os X-men, Os Vingadores, Thunderbolts ou os Guardiões da Galáxia?
+</h1>
+<h2>Descubra em qual time da marvel o seu personagem é mais compatível com esse formulário feito por Sophia Kraft!</h2>
+<h3>Como isso vai funcionar?</h3>
+<p>Para começar esse formulário, você precisa ter um personagem dos quadrinhos em mente, não necessariamente da marvel, mas é importante que esse personagem tenha um histórico amplo de combate e habilidades especiais.
+LEMBRETE: Esse teste não foi desenvolvido para adivinhar o time do seu personagem, mas foi feito para atribuir certas características especificas aos times disponíveis.
+    No final do formulário, você deve adicionar a soma final e o programa irá calcular em qual time o seu personagem se encaixa melhor.</p> <p style="color: greenyellow;">Para conseguir um resultado satisfatório é importante que TODAS as perguntas estajam respondidas</p>
+</div>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+</head>
+<style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Comic Sans MS", cursive;
+}
+
+body {
+  color: white;
+  background-color: black;
+  background-image: url("Design sem nome.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.banner h1 {
+  font-family: 'Bangers', cursive;
+  font-size: 60px;
+  color: #ffe600;
+
+  text-transform: uppercase;
+  letter-spacing: 3px;
+
+  -webkit-text-stroke: 2px black;
+
+  text-shadow:
+    3px 3px 0 black,
+    6px 6px 0 rgba(0,0,0,0.5);
+
+  margin-bottom: 20px;
+
+  transform: rotate(0.5deg);
+  display: inline-block;
+}
+
+fieldset {
+  transition: all 0.4s ease;
+  max-width: 600px;
+  margin: 25px auto;
+  padding: 20px;
+
+  background-color: #ffe600; 
+  border: 4px solid black;
+  box-shadow: 6px 6px 0 black;
+
+  opacity: 0.85;
+}
+
+fieldset.ativo {
+  opacity: 1;
+  transform: scale(1.02);
+  box-shadow: 10px 10px 0 black;
+}
+
+fieldset, fieldset * {
+  color: black;
+}
+
+fieldset {
+  animation: aparecer 0.4s ease;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 0.85;
+    transform: translateY(0);
+  }
+}
+
+legend {
+  background-color: black;
+  color: #ffe600;
+  padding: 6px 12px;
+  font-weight: bold;
+  border: 2px solid black;
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin: 8px 0;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* hover */
+label:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 black;
+}
+
+/* selecionado */
+input[type="radio"]:checked + label,
+label:has(input:checked) {
+  background: red;
+  color: rgb(255, 255, 255);
+}
+button {
+  display: block;
+  margin: 30px auto;
+  padding: 12px 25px;
+  background-color: rgb(85, 0, 255);
+  color: white;
+  border: 3px solid black;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 black;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+#classe {
+  font-family: 'Bangers', cursive;
+  font-size: 40px;
+  color: red;
+
+  -webkit-text-stroke: 2px black;
+  text-shadow: 3px 3px 0 black;
+  margin-top: 10px;
+}
+
+button {
+  transition: all 0.2s;
+}
+
+button:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+legend {
+  background: black;
+  color: #ffe600;
+  padding: 8px 15px;
+  font-size: 18px;
+
+  transform: rotate(-1deg);
+  display: inline-block; 
+  }
+
+#progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: rgba(255,255,255,0.2);
+  z-index: 1000;
+}
+
+#progress-bar {
+  height: 100%;
+  width: 0%;
+  background: red;
+  transition: width 0.3s ease;
+}
+
+#resultado-box {
+  margin-top: 120px;
+  text-align: center;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.5s ease;
+}
+
+#resultado-box.ativo {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+#classe {
+  font-family: 'Bangers', cursive;
+  font-size: 80px;
+
+  -webkit-text-stroke: 3px black;
+  text-shadow: 5px 5px 0 black;
+}
+
+.xmen { 
+  color: #ffe600;
+ }
+
+.vingadores { 
+  color: red; 
+}
+.thunderbolts {
+   color: purple; }
+
+.guardioes {
+  color: cyan; 
+  }
+
+#imagem-time {
+  margin-top: 20px;
+  max-width: 300px;
+  width: 80%;
+
+  border: 4px solid black;
+  box-shadow: 6px 6px 0 black;
+
+  display: none;
+  animation: aparecerImagem 0.5s ease;
+}
+
+@keyframes aparecerImagem {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+#imagem-time {
+  display: block;
+  margin: 20px auto;
+
+  max-width: 300px;
+  width: 80%;
+
+  transition: transform 0.3s ease;
+}
+
+#imagem-time:hover {
+  transform: scale(1.1);
+}
+</style>
+
+<body>
+<div id="progress-container">
+  <div id="progress-bar"></div>
+</div>
+
+<fieldset>
+  <legend>Altura</legend>
+  <label><input type="radio" name="q1" value="1"> Até 1.10m</label><br>
+  <label><input type="radio" name="q1" value="2"> 1.10 - 1.70m</label><br>
+  <label><input type="radio" name="q1" value="3"> Mais de 1.70m</label>
+</fieldset>
+
+<br>
+
+<fieldset>
+  <legend>Intenção</legend>
+  <label><input type="radio" name="q2" value="1"> Herói</label><br>
+  <label><input type="radio" name="q2" value="2"> Anti-herói</label><br>
+  <label><input type="radio" name="q2" value="3"> Vilão</label>
+</fieldset>
+
+<br>
+
+<fieldset>
+  <legend>Batalhas</legend>
+  <label><input type="radio" name="q3" value="1"> Ganha mais</label><br>
+  <label><input type="radio" name="q3" value="3"> Perde mais</label><br>
+  <label><input type="radio" name="q3" value="0"> Empate</label>
+</fieldset>
+
+<br>
+
+<fieldset>
+  <legend>Usa máscara?</legend>
+  <label><input type="radio" name="q4" value="1"> Sim</label><br>
+  <label><input type="radio" name="q4" value="0"> Não</label>
+</fieldset>
+
+<br>
+
+<fieldset>
+  <legend>Usa arma?</legend>
+  <label><input type="radio" name="q5" value="2"> Sim</label><br>
+  <label><input type="radio" name="q5" value="1"> Às vezes</label><br>
+  <label><input type="radio" name="q5" value="0"> Não</label>
+</fieldset>
+
+<br>
+
+<fieldset>
+  <legend>Origem dos poderes</legend>
+  <label><input type="radio" name="q6" value="1"> Biologia</label><br>
+  <label><input type="radio" name="q6" value="2"> Ciência/Energia</label><br>
+  <label><input type="radio" name="q6" value="3"> Tecnologia</label><br>
+  <label><input type="radio" name="q6" value="4"> Magia</label><br>
+  <label><input type="radio" name="q6" value="5"> Origem alienígena</label>
+</fieldset>
+            
+<br>
+
+<fieldset>
+  <legend>Consegue esconder poderes?</legend>
+  <label><input type="radio" name="q7" value="1"> Não</label><br>
+  <label><input type="radio" name="q7" value="0"> Sim</label>
+</fieldset>
+
+<br>
+
+<fieldset>
+  <legend>Origem</legend>
+  <label><input type="radio" name="q8" value="3">Planeta Terra</label><br>
+  <label><input type="radio" name="q8" value="2">Extraterrestre</label><br>
+  <label><input type="radio" name="q8" value="3">Nasceu na terra mas foi criado/se desenvolveu em outros planetas</label><br>
+</fieldset>
+
+<br>
+
+<fieldset>
+  <legend>Personalidade e decisões</legend>
+  <label><input type="radio" name="q9" value="1"> Seu personagem costuma agir de forma mais racional</label><br>
+  <label><input type="radio" name="q9" value="2"> Seu personagem costuma agir de forma mais emocional</label><br>
+  <label><input type="radio" name="q9" value="3"> Seu personagem possuí uma inclinação para o mal e sadismo</label><br>
+  <label><input type="radio" name="q9" value="4"> Seu personagem possuí uma inclinação para o bem.</label><br>
+  <label><input type="radio" name="q9" value="5"> Seu personagem possuí uma intenção positiva mas no final acaba causando mais danos doque benefícios.</label>
+</fieldset>
+            
+<br>
+
+
+<button type="button" onclick="calcular()"><p style="color: red;"></p>Calcular</button>
+<div id="resultado-box">
+  <h1 id="classe">---</h1>
+  <p id="resultado">Pontuação: 0</p>
+  <img id="imagem-time" src="" alt="Time">
+</div>
+
+<script>
+function calcular() {
+  let total = 0;
+  let perguntas = ["q1","q2","q3","q4","q5","q6","q7","q8","q9"];
+
+  let respondidas = 0;
+
+  perguntas.forEach((nome) => {
+    let selecionado = document.querySelector(`input[name="${nome}"]:checked`);
+
+    if (selecionado) {
+      total += Number(selecionado.value);
+      respondidas++;
+    }
+  });
+
+  if (respondidas < perguntas.length) {
+    alert("Responda todas as perguntas!");
+    return;
+  }
+
+  let time = "";
+  let classeCSS = "";
+
+  if (total <= 20) {
+    time = "Guardiões da Galáxia";
+    classeCSS = "guardioes";
+  } else if (total <= 18) {
+    time = "Vingadores";
+    classeCSS = "vingadores";
+  } else if (total <= 16) {
+    time = "Thunderbolts";
+    classeCSS = "thunderbolts";
+  } else {
+    time = "X-Men";
+    classeCSS = "xmen";
+  }
+
+  let titulo = document.getElementById("classe");
+
+  titulo.innerText = time;
+  titulo.className = classeCSS;
+
+  document.getElementById("resultado").innerText = "Pontuação: " + total;
+
+  let box = document.getElementById("resultado-box");
+
+  box.classList.add("ativo");
+
+  setTimeout(() => {
+    box.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+  }, 200);
+
+  let imagem = document.getElementById("imagem-time");
+
+if (total <= 10) {
+  time = "Guardiões da Galáxia";
+  classeCSS = "guardioes";
+  imagem.src = "guardioes.jpg";
+} else if (total <= 15) {
+  time = "Vingadores";
+  classeCSS = "vingadores";
+  imagem.src = "avengers.jpg";
+} else if (total <= 20) {
+  time = "Thunderbolts";
+  classeCSS = "thunderbolts";
+  imagem.src = "thunderbolts.jpg";
+} else {
+  time = "X-Men";
+  classeCSS = "xmen";
+  imagem.src = "xmen.webp";
+}
+
+imagem.style.display = "block";
+}
+
+
+
+let fieldsets = document.querySelectorAll("fieldset");
+let totalPerguntas = fieldsets.length;
+
+fieldsets.forEach((fs, index) => {
+  let inputs = fs.querySelectorAll("input");
+
+  inputs.forEach((input) => {
+    input.addEventListener("change", () => {
+
+      fieldsets.forEach(f => f.classList.remove("ativo"));
+      fs.classList.add("ativo");
+
+
+      let respondidas = document.querySelectorAll("input:checked").length;
+      let porcentagem = (respondidas / totalPerguntas) * 100;
+
+      document.getElementById("progress-bar").style.width = porcentagem + "%";
+
+      let proximo = fieldsets[index + 1];
+
+      if (proximo) {
+        setTimeout(() => {
+          proximo.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+          });
+        }, 250);
+      }
+    });
+  });
+});
+</script>
+</body>
+
+</html>
